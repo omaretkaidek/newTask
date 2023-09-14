@@ -77,10 +77,21 @@ const UserModel = {
             .where('UserGroups.userID', userId)
             .select('Permissions.name');
     },
+
+    async setProfilePhotoId(userId, fileId){
+        return knex('Users')
+            .where('id', userId)
+            .update({ profile_photo_id: fileId });
+    },
     
+    async getProfilePhotoId(userId){
+        const user = await knex('Users').select('profile_photo_id').where('id', userId).first();
+        return user.profile_photo_id;
+    },
     
-    
-    
+    async removeProfilePhotoId(userId){
+        return knex('Users').where('id', userId).update({ profile_photo_id: null });
+    },
 };
 
 module.exports = UserModel;

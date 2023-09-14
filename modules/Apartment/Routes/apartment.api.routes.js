@@ -9,12 +9,16 @@ const {
   idApartmentValidation,
 } = require("../Validation/ApartmentValidation");
 
+const upload = require('/Users/omaretkaidek/Desktop/newTask/modules/Middlewares/FileUploadMiddleware');
+
+
 // Map the HTTP verbs to controller methods
 
 // POST request to create a new user
 router.post(
   "/apartments",
   authorizeUser("write_apartment"),
+  upload.array('apartmentPhotos', 10), // for example, up to 10 photos
   ApartmentValidation,
   apartmentController.createApartment
 );

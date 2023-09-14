@@ -20,7 +20,7 @@ const id = param('id')
         return true;
     });
 
-const name = body('Username')
+const username = body('Username')
     .not().isEmpty().withMessage('username is required')
     .isString().withMessage('username must contain only letters')
     .isLength({ min: 3, max: 30 }).withMessage('Invalid username length')
@@ -42,10 +42,41 @@ const password = body('Password')
     .not().isEmpty().withMessage('Password is required')
     .isLength({ min: 6 }).withMessage('Password must be at least 6 characters long');
 
+const firstName = body('FirstName')
+    .not().isEmpty().withMessage('First name is required')
+
+const lastName = body('LastName')
+    .not().isEmpty().withMessage('Last name is required')
+
+const photo = body('profilePhoto')
+    .custom((value, { req }) => {
+        console.log(req);
+        if (!req.file) { // Check if the photo exists in the request
+            return true;
+        }
+
+        // Check for acceptable image formats (jpg, jpeg, png, gif)
+        const acceptableFormats = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+        if (!acceptableFormats.includes(req.file.mimetype)) {
+            throw new Error('Invalid image format. Only jpg, jpeg, png, and gif are accepted.');
+        }
+
+        // check for file size (5MB limit)
+        if (req.file.size > 5 * 1024 * 1024) { 
+            throw new Error('Image size should be less than 5MB');
+        }
+
+        // Indicate a successful validation
+        return true;
+    });
+    
 const authenticationValidation = [
-    name,
+    username,
     email,
-    password
+    password,
+    firstName,
+    lastName,
+    photo
 ]
 
 const  signInValidation = [
@@ -54,7 +85,7 @@ const  signInValidation = [
 ]
 
 const updateUservalidation = [
-    name,
+    username,
     email,
     password
 
@@ -64,9 +95,14 @@ const idValidation = [
     id
 ]
 
+const photoValidation = [
+    photo
+]
+
 module.exports = {
     updateUservalidation,
     signInValidation,
     idValidation,
-    authenticationValidation
+    authenticationValidation,
+    photoValidation
 };

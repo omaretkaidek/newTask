@@ -34,7 +34,7 @@ const ApartmentModel = {
         return Boolean(apartment);
     },
 
-    async nameApartmentExists(name) {
+    async nameExists(name) {
         const apartment = await knex(tableName).where({ name }).first();
         return Boolean(apartment); 
     },

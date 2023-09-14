@@ -10,6 +10,7 @@ exports.up = function(knex) {
       table.string('LastName').notNullable();
       table.string('Email').notNullable().unique();
       table.string('Password').notNullable();
+      table.string('profile_photo_id');
     });
   };
   

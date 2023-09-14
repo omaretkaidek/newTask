@@ -67,6 +67,8 @@ const UserService = {
     if (groupId) {
       await UserModel.assignUserToGroup(userId, groupId);
     }
+
+    return userId
   },
 
   async signInUser(email, password) {
@@ -86,6 +88,18 @@ const UserService = {
 
   async getUserPermissions(userId) {
     return await UserModel.getPermissionsByUserId(userId);
+  },
+  
+  async setProfilePhotoId(userId, fileId){
+    await UserModel.setProfilePhotoId(userId, fileId);
+  },
+
+  async getProfilePhotoId(userId){
+    return UserModel.getProfilePhotoId(userId);
+},
+
+  async removeProfilePhotoId(userId){
+    return UserModel.removeProfilePhotoId(userId);
   },
 };
 

@@ -2,6 +2,7 @@
 
 const ApartmentService = require('../Service/ApartmentService');
 const { validationResult } = require('express-validator');
+const fileService = require('/Users/omaretkaidek/Desktop/newTask/modules/FileManager/Service/FileService');
 
 exports.createApartment = async (req, res, next) => {
     try {
@@ -13,6 +14,11 @@ exports.createApartment = async (req, res, next) => {
 
         // Call the service method to handle the business logic
         const newApartment = await ApartmentService.registerApartment(req.body);
+        if (req.files) {
+            await Promise.all(req.files.map(async (file) => {
+            const fileId = await fileService.uploadFile(file, "apartments", newApartment);
+            }));
+        }
         console.log("apartment created successfully");
 
         // Send back the appropriate response
@@ -69,6 +75,11 @@ exports.updateApartmentById = async (req, res, next) => {
 
 exports.deleteApartmentById = async (req, res, next) => {
     try {
+        // Check for validation errors
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ message: "Validation failed", errors: errors.array() });
+        }
         const apartmentId = req.params.id;
 
         const result = await ApartmentService.deleteApartmentById(apartmentId);
@@ -82,4 +93,6 @@ exports.deleteApartmentById = async (req, res, next) => {
         return res.status(500).json({ message: "Internal server error", error: error.message });
     }
 };
+
+
 
