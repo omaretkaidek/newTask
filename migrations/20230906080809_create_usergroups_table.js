@@ -3,12 +3,17 @@
  * @returns { Promise<void> }
  */
 exports.up = function(knex) {
-    return knex.schema.createTable('UserGroups', function(table) {
-      table.integer('UserID').unsigned().references('id').inTable('Users');
-      table.integer('GroupID').unsigned().references('id').inTable('Group');
+  return knex.schema.createTable('UserGroups', function(table) {
+      table.integer('UserID').unsigned();
+      table.integer('GroupID').unsigned();
       table.primary(['UserID', 'GroupID']); // Composite primary key
-    });
-  };
+
+      // Setting up foreign key references
+      table.foreign('UserID').references('id').inTable('Users');
+      table.foreign('GroupID').references('id').inTable('Group');
+  });
+};
+
 
 /**
  * @param { import("knex").Knex } knex
