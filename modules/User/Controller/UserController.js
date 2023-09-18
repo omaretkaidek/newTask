@@ -3,9 +3,8 @@
 const UserService = require('../Service/UserService');
 const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
-const fileService = require('/Users/omaretkaidek/Desktop/newTask/modules/FileManager/Service/FileService');
-const FileController = require('/Users/omaretkaidek/Desktop/newTask/modules/FileManager/Controller/FileController');
-
+const fileService = require('../../FileManager/Service/FileService');
+const FileController = require('../../FileManager/Controller/FileController');
 exports.createUser = async (req, res, next) => {
     try {
         // Check for validation errors

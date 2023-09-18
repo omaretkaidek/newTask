@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const neighbourhoodController = require('../Controller/NeighbourhoodController');
 const { NeighbourhoodValidation, idNeighbourhoodValidation } = require('../Validation/NeighbourhoodValidation');
-const authorizeUser = require("/Users/omaretkaidek/Desktop/newTask/modules/Middlewares/authorization");
+const authorizeUser = require("../../Middlewares/authorization");
 // Map the HTTP verbs to controller methods
 
 router.post('/neighbourhoods', authorizeUser("write_neighbourhood"), NeighbourhoodValidation, neighbourhoodController.createNeighbourhood);

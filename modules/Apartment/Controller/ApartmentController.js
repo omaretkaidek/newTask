@@ -2,7 +2,7 @@
 
 const ApartmentService = require('../Service/ApartmentService');
 const { validationResult } = require('express-validator');
-const fileService = require('/Users/omaretkaidek/Desktop/newTask/modules/FileManager/Service/FileService');
+const fileService = require('../../FileManager/Service/FileService');
 
 exports.createApartment = async (req, res, next) => {
     try {

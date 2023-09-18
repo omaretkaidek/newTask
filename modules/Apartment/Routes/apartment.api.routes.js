@@ -3,7 +3,7 @@
 const express = require("express");
 const router = express.Router();
 const apartmentController = require("../Controller/ApartmentController");
-const authorizeUser = require("/Users/omaretkaidek/Desktop/newTask/modules/Middlewares/authorization");
+const authorizeUser = require("../../Middlewares/authorization");
 const {
   ApartmentValidation,
   idApartmentValidation,

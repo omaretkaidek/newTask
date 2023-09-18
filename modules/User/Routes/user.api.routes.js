@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../Controller/UserController');
 const {updateUservalidation, idValidation, authenticationValidation, signInValidation, photoValidation} = require('../Validation/UserValidation');
-const fileUploadMiddleware = require('/Users/omaretkaidek/Desktop/newTask/modules/Middlewares/FileUploadMiddleware');
+const fileUploadMiddleware = require('../../Middlewares/FileUploadMiddleware');
 
 // Map the HTTP verbs to controller methods
 router.post('/register', fileUploadMiddleware.single('profilePhoto'), authenticationValidation, userController.register);
