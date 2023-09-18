@@ -9,7 +9,7 @@ const {
   idApartmentValidation,
 } = require("../Validation/ApartmentValidation");
 
-const upload = require('/Users/omaretkaidek/Desktop/newTask/modules/Middlewares/FileUploadMiddleware');
+const upload = require('../../Middlewares/FileUploadMiddleware');
 
 
 // Map the HTTP verbs to controller methods
